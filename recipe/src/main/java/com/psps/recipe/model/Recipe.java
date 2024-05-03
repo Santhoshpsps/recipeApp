@@ -2,6 +2,8 @@ package com.psps.recipe.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Recipe {
     @Id
@@ -16,13 +18,18 @@ public class Recipe {
     private String url;
     private String directions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Ingredient ingredient;
+    private Set<Ingredient> ingredient;
 
-    public Ingredient getIngredient() {
+    @ManyToMany()
+    @JoinTable(name = "recipe_category",
+    joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
+
+    public Set<Ingredient> getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(Ingredient ingredient) {
+    public void setIngredient(Set<Ingredient> ingredient) {
         this.ingredient = ingredient;
     }
 
