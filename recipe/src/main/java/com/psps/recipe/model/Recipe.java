@@ -15,9 +15,31 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Ingredient ingredient;
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
     @Lob
     private Byte[] image;
-//    private Difficulty difficulty;
+
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
