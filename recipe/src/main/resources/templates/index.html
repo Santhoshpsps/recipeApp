@@ -6,5 +6,19 @@
 </head>
 <body>
 <h3 th:text="'Recipe Book'">IndexPage</h3>
+<hr/>
+<table class="table table-striped">
+    <thead>
+    <th style="width: 150px;">Id</th>
+    <th style="width: 150px;">Recipe</th>
+    </thead>
+    <tbody>
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.id}">1</td>
+        <td th:text="${recipe.description}">Butter Chicken</td>
+    </tr>
+    </tbody>
+
+</table>
 </body>
 </html>

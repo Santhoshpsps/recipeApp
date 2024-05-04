@@ -2,16 +2,28 @@ package com.psps.recipe.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private String amount;
+    private BigDecimal amount;
 
     @ManyToOne
     private Recipe recipe;
+
+    public Ingredient() {
+    }
+
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom, Recipe recipe) {
+        this.description = description;
+        this.amount = amount;
+        this.uom = uom;
+        this.recipe = recipe;
+    }
 
     public Recipe getRecipe() {
         return recipe;
@@ -20,7 +32,7 @@ public class Ingredient {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private UnitOfMeasure uom;
 
     public UnitOfMeasure getUom() {
@@ -47,11 +59,11 @@ public class Ingredient {
         this.description = description;
     }
 
-    public String getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }
