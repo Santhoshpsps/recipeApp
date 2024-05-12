@@ -7,8 +7,8 @@ import lombok.NonNull;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Data
-@EqualsAndHashCode(exclude = {"ingredients","categories"})
 @Entity
 public class Recipe {
 
@@ -27,7 +27,6 @@ public class Recipe {
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    @NonNull
     private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
@@ -40,21 +39,17 @@ public class Recipe {
     private Notes notes;
 
     @ManyToMany
-    @JoinTable(name = "recipe_category",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    @JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    public void setNotes(Notes notes) {
+        this.notes = notes;
+        notes.setRecipe(this);
+    }
 
-
-//    public Recipe addIngredient(Ingredient ingredient){
-//        ingredient.setRecipe(this);
-//        this.ingredients.add(ingredient);
-//        return this;
-//    }
-    public void setNotes(Notes notes) { if (notes != null) { this.notes = notes; notes.setRecipe(this); } }
-
-
-
-    public Recipe addIngredient(Ingredient ingredient){ ingredient.setRecipe(this); this.ingredients.add(ingredient); return this; }
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
 }
