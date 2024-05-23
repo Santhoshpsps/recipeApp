@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @RunWith(SpringRunner.class)
 @DataJpaTest
 class UnitOfMeasureRepositoryIT {
@@ -24,11 +25,12 @@ class UnitOfMeasureRepositoryIT {
     @Test
     void findByDescriptionCup() {
         Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Cup");
-        assertEquals(unitOfMeasureOptional.get().getDescription(),"Cup");
+        assertEquals(unitOfMeasureOptional.get().getDescription(), "Cup");
     }
+
     @Test
     void findByDescription() {
         Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-        assertEquals(unitOfMeasureOptional.get().getDescription(),"Teaspoon");
+        assertEquals(unitOfMeasureOptional.get().getDescription(), "Teaspoon");
     }
 }

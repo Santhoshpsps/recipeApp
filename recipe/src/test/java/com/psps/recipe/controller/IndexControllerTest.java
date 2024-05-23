@@ -48,7 +48,7 @@ class IndexControllerTest {
         Set<Recipe> recipes = new HashSet<>();
         recipes.add(new Recipe());
 
-        Recipe recipe1= new Recipe();
+        Recipe recipe1 = new Recipe();
         recipe1.setId(2L);
 
         recipes.add(recipe1);
@@ -57,9 +57,9 @@ class IndexControllerTest {
 
         ArgumentCaptor<Set<Recipe>> setArgumentCaptor = ArgumentCaptor.forClass(Set.class);
 
-        assertEquals(indexController.getIndexPage(model),"index");
-        verify(recipeService,times(1)).fetchRecipes();
-        verify(model,times(1)).addAttribute(eq("recipes"),setArgumentCaptor.capture());
-        assertEquals(setArgumentCaptor.getValue().size(),2);
+        assertEquals(indexController.getIndexPage(model), "index");
+        verify(recipeService, times(1)).fetchRecipes();
+        verify(model, times(1)).addAttribute(eq("recipes"), setArgumentCaptor.capture());
+        assertEquals(setArgumentCaptor.getValue().size(), 2);
     }
 }

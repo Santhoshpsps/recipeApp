@@ -25,12 +25,13 @@ class RecipeServiceImplTest {
 
     Set<Recipe> recipeSet;
     Recipe recipe;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         recipeService = new RecipeServiceImpl(recipeRepository);
         recipeSet = new HashSet<>();
-         recipe = new Recipe();
+        recipe = new Recipe();
         recipeSet.add(recipe);
     }
 
@@ -38,10 +39,10 @@ class RecipeServiceImplTest {
     void fetchRecipes() {
         Mockito.when(recipeService.fetchRecipes()).thenReturn(recipeSet);
 
-        Set<Recipe> recipes =  recipeService.fetchRecipes();
-        assertEquals(recipes.size(),1);
+        Set<Recipe> recipes = recipeService.fetchRecipes();
+        assertEquals(recipes.size(), 1);
 
-        verify(recipeRepository ,times(1)).findAll();
+        verify(recipeRepository, times(1)).findAll();
 
     }
 }
