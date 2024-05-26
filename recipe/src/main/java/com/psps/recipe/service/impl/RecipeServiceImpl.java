@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -27,4 +28,11 @@ public class RecipeServiceImpl implements RecipeService {
         System.out.println(recipeSet);
         return recipeSet;
     }
+
+    @Override
+    public Recipe findById(Long id) {
+        Set<Recipe> recipes = fetchRecipes();
+        return  recipes.stream().filter(o-> o.getId().equals(id)).findFirst().orElse(null);
+    }
+
 }
