@@ -15,7 +15,7 @@ public class CategoryCommandToCategory implements Converter<CategoryCommand, Cat
     @Nullable
     @Override
     public Category convert(CategoryCommand source) {
-        if(source ==null){
+        if (source == null) {
             return null;
         }
         final Category category = new Category();

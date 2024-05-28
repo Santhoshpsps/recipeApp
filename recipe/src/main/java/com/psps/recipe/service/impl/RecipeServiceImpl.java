@@ -22,11 +22,13 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe, RecipeToRecipeCommand recipeToRecipeCommand) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe,
+            RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
     }
+
     @Override
     public Set<Recipe> fetchRecipes() {
         Set<Recipe> recipeSet = new HashSet<>();
@@ -39,9 +41,8 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe findById(Long id) {
         Set<Recipe> recipes = fetchRecipes();
-        return  recipes.stream().filter(o-> o.getId().equals(id)).findFirst().orElse(null);
+        return recipes.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
     }
-
 
     @Override
     @Transactional
