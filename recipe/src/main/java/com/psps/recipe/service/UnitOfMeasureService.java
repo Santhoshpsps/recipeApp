@@ -1,0 +1,10 @@
+package com.psps.recipe.service;
+
+import com.psps.recipe.commands.UnitOfMeasureCommand;
+
+import java.util.Set;
+
+public interface UnitOfMeasureService {
+
+    Set<UnitOfMeasureCommand> listAllUoms();
+}

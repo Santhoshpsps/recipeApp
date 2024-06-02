@@ -1,12 +1,11 @@
 package com.psps.recipe.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
-@Data
-@EqualsAndHashCode(exclude = { "recipe" })
+@Getter
+@Setter
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Notes {
 
