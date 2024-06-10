@@ -43,7 +43,7 @@ public class RecipeController {
         return "recipe/recipeform";
     }
 
-    @PostMapping({"recipe","recipe/"})
+    @PostMapping({ "recipe", "recipe/" })
     public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
         RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 
@@ -57,9 +57,5 @@ public class RecipeController {
         recipeService.deleteById(Long.valueOf(id));
         return "redirect:/";
     }
-
-
-
-
 
 }
