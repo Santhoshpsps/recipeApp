@@ -14,16 +14,18 @@ import java.io.IOException;
 @Service
 public class ImageServiceImpl implements ImageService {
 
+
     private final RecipeRepository recipeRepository;
 
-    public ImageServiceImpl(RecipeRepository recipeService) {
+    public ImageServiceImpl( RecipeRepository recipeService) {
 
         this.recipeRepository = recipeService;
     }
 
     @Override
     @Transactional
-    public void saveImageFile(Long recipeId, MultipartFile file) {
+    public void saveImageFile(String recipeId, MultipartFile file) {
+
         try {
             Recipe recipe = recipeRepository.findById(recipeId).get();
 
@@ -31,7 +33,7 @@ public class ImageServiceImpl implements ImageService {
 
             int i = 0;
 
-            for (byte b : file.getBytes()) {
+            for (byte b : file.getBytes()){
                 byteObjects[i++] = b;
             }
 
@@ -39,7 +41,7 @@ public class ImageServiceImpl implements ImageService {
 
             recipeRepository.save(recipe);
         } catch (IOException e) {
-            // todo handle better
+            //todo handle better
             log.error("Error occurred", e);
 
             e.printStackTrace();

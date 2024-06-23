@@ -2,30 +2,24 @@ package com.psps.recipe.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "recipe" })
-@Entity
 public class Ingredient {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id = UUID.randomUUID().toString();
     private String description;
     private BigDecimal amount;
 
-    @ToString.Exclude
-    @OneToOne(fetch = FetchType.EAGER)
+    @DBRef
     private UnitOfMeasure uom;
 
-    @ToString.Exclude
-    @ManyToOne
-    private Recipe recipe;
-
     public Ingredient() {
+
     }
 
     public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
@@ -38,7 +32,6 @@ public class Ingredient {
         this.description = description;
         this.amount = amount;
         this.uom = uom;
-        this.recipe = recipe;
     }
 
 }

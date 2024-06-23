@@ -2,22 +2,19 @@ package com.psps.recipe.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Set;
 
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = { "recipes" })
-@Entity
+@Document
 public class Category {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String description;
 
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "categories")
+    @DBRef
     private Set<Recipe> recipes;
-
 }

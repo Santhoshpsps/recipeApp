@@ -1,13 +1,13 @@
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/psps_dev
-    username: psps_dev_user
-    password: psps
-  sql:
-    init:
-      mode: always
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    database: mysql
-    show-sql: true
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/psps_dev
+#    username: psps_dev_user
+#    password: psps
+#  sql:
+#    init:
+#      mode: always
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#    database: mysql
+#    show-sql: true

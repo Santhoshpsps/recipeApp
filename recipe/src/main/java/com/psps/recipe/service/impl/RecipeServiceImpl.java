@@ -26,8 +26,7 @@ public class RecipeServiceImpl implements RecipeService {
     private final RecipeCommandToRecipe recipeCommandToRecipe;
     private final RecipeToRecipeCommand recipeToRecipeCommand;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe,
-            RecipeToRecipeCommand recipeToRecipeCommand) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeCommandToRecipe recipeCommandToRecipe, RecipeToRecipeCommand recipeToRecipeCommand) {
         this.recipeRepository = recipeRepository;
         this.recipeCommandToRecipe = recipeCommandToRecipe;
         this.recipeToRecipeCommand = recipeToRecipeCommand;
@@ -43,12 +42,12 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe findById(Long l) {
+    public Recipe findById(String id) {
 
-        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
 
         if (!recipeOptional.isPresent()) {
-            throw new NotFoundException("Recipe Not Found for ID :" + String.valueOf(l));
+            throw new NotFoundException("Recipe Not Found. For ID value: " + id );
         }
 
         return recipeOptional.get();
@@ -56,8 +55,18 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @Transactional
-    public RecipeCommand findCommandById(Long l) {
-        return recipeToRecipeCommand.convert(findById(l));
+    public RecipeCommand findCommandById(String id) {
+
+        RecipeCommand recipeCommand = recipeToRecipeCommand.convert(findById(id));
+
+        //enhance command object with id value
+        if(recipeCommand.getIngredients() != null && recipeCommand.getIngredients().size() > 0){
+            recipeCommand.getIngredients().forEach(rc -> {
+                rc.setRecipeId(recipeCommand.getId());
+            });
+        }
+
+        return recipeCommand;
     }
 
     @Override
@@ -71,7 +80,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void deleteById(Long idToDelete) {
+    public void deleteById(String idToDelete) {
         recipeRepository.deleteById(idToDelete);
     }
 }
