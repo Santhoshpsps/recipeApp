@@ -36,6 +36,12 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        //To avoid non unique results return
+       if(recipeRepository.count()>0){
+           recipeRepository.deleteAll();
+           categoryRepository.deleteAll();
+           unitOfMeasureRepository.deleteAll();
+       }
         loadCategories();
         loadUom();
         recipeRepository.saveAll(getRecipes());
