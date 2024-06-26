@@ -25,40 +25,25 @@ import java.util.Optional;
 public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryReactiveRepository categoryRepository;
-    private final RecipeReactiveRepository recipeRepository;
+    private final RecipeRepository recipeRepository;
     private final UnitOfMeasureReactiveRepository unitOfMeasureRepository;
 
-    public RecipeBootStrap(CategoryReactiveRepository categoryRepository, RecipeReactiveRepository recipeRepository, UnitOfMeasureReactiveRepository unitOfMeasureRepository) {
+    public RecipeBootStrap(CategoryReactiveRepository categoryRepository, RecipeRepository recipeRepository, UnitOfMeasureReactiveRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
     }
 
-//    @Autowired
-//    UnitOfMeasureReactiveRepository unitOfMeasureReactiveRepository;
-//
-//    @Autowired
-//    CategoryReactiveRepository categoryReactiveRepository;
-//
-//    @Autowired
-//    RecipeReactiveRepository recipeReactiveRepository;
-
-//    public RecipeBootStrap(CategoryRepository categoryRepository, RecipeRepository recipeRepository,
-//            UnitOfMeasureRepository unitOfMeasureRepository) {
-//        this.categoryRepository = categoryRepository;
-//        this.recipeRepository = recipeRepository;
-//        this.unitOfMeasureRepository = unitOfMeasureRepository;
-//    }
-
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-
+        log.error("#### ");
+        log.error(String.valueOf(recipeRepository.count()));
 
         // To avoid non unique results return
-        if (recipeRepository.count().block().intValue() > 0) {
-            recipeRepository.deleteAll().block();
+        if (unitOfMeasureRepository.count().block().intValue() > 0) {
+            recipeRepository.deleteAll();
             categoryRepository.deleteAll().block();
             unitOfMeasureRepository.deleteAll().block();
         }
@@ -70,7 +55,7 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
         log.error("#####");
         log.error("UOM Count: "+ unitOfMeasureRepository.count().block().toString());
         log.error("Category Count: "+ categoryRepository.count().block().toString());
-        log.error("Recipe Count: "+ recipeRepository.count().block().toString());
+        log.error("Recipe Count: "+ recipeRepository.count());
     }
 
     private void loadCategories() {
