@@ -1,7 +1,5 @@
 package com.psps.recipe.converters;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.psps.recipe.commands.CategoryCommand;
 import com.psps.recipe.model.Category;
 import jakarta.annotation.Nullable;

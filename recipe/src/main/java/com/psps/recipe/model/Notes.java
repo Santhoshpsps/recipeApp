@@ -1,7 +1,7 @@
 package com.psps.recipe.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter

@@ -2,18 +2,21 @@ package com.psps.recipe.service;
 
 import com.psps.recipe.commands.RecipeCommand;
 import com.psps.recipe.model.Recipe;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Set;
 
 public interface RecipeService {
-    Set<Recipe> getRecipes();
 
-    Recipe findById(String l);
+    Flux<Recipe> getRecipes();
 
-    RecipeCommand findCommandById(String l);
+    Mono<Recipe> findById(String id);
 
-    RecipeCommand saveRecipeCommand(RecipeCommand command);
+    Mono<RecipeCommand> findCommandById(String id);
 
-    void deleteById(String idToDelete);
+    Mono<RecipeCommand> saveRecipeCommand(RecipeCommand command);
+
+    Mono<Void> deleteById(String idToDelete);
 }
